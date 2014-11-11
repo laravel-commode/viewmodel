@@ -1,6 +1,6 @@
 <?php namespace LaravelCommode\ViewModel;
 
-    use Dubpub\LaravelCommode\Common\GhostService\GhostService;
+    use LaravelCommode\Common\GhostService\GhostService;
     use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
     use LaravelCommode\ViewModel\Interfaces\IRequestBag;
     use LaravelCommode\ViewModel\Interfaces\IViewModel;
@@ -20,19 +20,19 @@
          */
         public function provides()
         {
-            return array('dubpub.viewmodel');
+            return array('commode.viewmodel');
         }
 
         public function boot()
         {
-            $this->package('dubpub/viewmodel');
+            $this->package('laravel-commode/viewmodel');
         }
 
         public function launching() { }
 
         public function registering()
         {
-            $this->app->bind('Dubpub\ViewModel\Interfaces\IRequestBag', 'Dubpub\ViewModel\RequestBag');
+            $this->app->bind('LaravelCommode\ViewModel\Interfaces\IRequestBag', 'LaravelCommode\ViewModel\RequestBag');
 
             $this->app->resolvingAny(function($resolved, $application = null) {
                 if ($resolved instanceof IFileViewModel) {
