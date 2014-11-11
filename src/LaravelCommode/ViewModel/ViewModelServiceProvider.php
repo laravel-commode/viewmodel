@@ -32,7 +32,7 @@
 
         public function registering()
         {
-            $this->app->bind('LaravelCommode\ViewModel\Interfaces\IRequestBag', 'LaravelCommode\ViewModel\RequestBag');
+            $this->app->bind(IRequestBag::class, RequestBag::class);
 
             $this->app->resolvingAny(function($resolved, $application = null) {
                 if ($resolved instanceof IFileViewModel) {
