@@ -12,7 +12,7 @@
 
     /**
      * Class ViewModel
-     * @package Dubpub\ViewModel
+     * @package LaravelCommode\ViewModel
      */
     abstract class FileViewModel extends ViewModel implements IFileViewModel
     {

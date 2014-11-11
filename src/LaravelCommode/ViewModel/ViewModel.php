@@ -7,7 +7,7 @@
 
     /**
      * Class ViewModel
-     * @package Dubpub\ViewModel
+     * @package LaravelCommode\ViewModel
      */
     abstract class ViewModel extends BaseViewModel implements IValidatableViewModel
     {

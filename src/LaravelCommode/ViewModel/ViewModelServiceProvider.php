@@ -9,7 +9,7 @@
 
     /**
      * Class ViewModelServiceProvider
-     * @package Dubpub\ViewModel
+     * @package LaravelCommode\ViewModel
      */
     class ViewModelServiceProvider extends GhostService
     {
