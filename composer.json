@@ -1,0 +1,26 @@
+{
+    "name": "laravel-commode/viewmodel",
+    "description": "ViewModel approach for laravel 4.(=>1)",
+    "authors": [
+        {
+            "name": "Volynov Andrey",
+            "email": "dubpubz@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.2.*",
+        "laravel-commode/common": "dev-master"
+    },
+    "target-dir": "LaravelCommode\\ViewModel",
+    "repositories": [{
+        "type": "vcs",
+        "url" : "/home/madman/Projects/commode/laravel-commode-common"
+    }],
+    "autoload": {
+        "psr-0": {
+            "LaravelCommode\\ViewModel": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
