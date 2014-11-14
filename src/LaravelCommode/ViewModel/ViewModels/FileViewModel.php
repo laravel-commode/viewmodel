@@ -1,6 +1,6 @@
-<?php namespace LaravelCommode\ViewModel;
+<?php namespace LaravelCommode\ViewModel\ViewModels;
 
-    use LaravelCommode\ViewModel\ViewModel;
+    use LaravelCommode\ViewModel\ViewModels\ViewModel;
     use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
     use LaravelCommode\ViewModel\Interfaces\IViewModel;
 

@@ -12,6 +12,9 @@
         "illuminate/support": "4.2.*",
         "laravel-commode/common": "dev-master"
     },
+    "suggest": {
+        "laravel-commode/area": "Allows smart project domain logic management by breaking it into areas"
+    },
     "repositories": [{
         "type": "vcs",
         "url" : "/home/madman/Projects/commode/laravel-commode-common"

@@ -1,9 +1,9 @@
 <?php
-    namespace LaravelCommode\ViewModel;
+    namespace LaravelCommode\ViewModel\RequestBag;
 
     use ArrayAccess;
 
-    use LaravelCommode\ViewModel\BaseViewModel;
+    use LaravelCommode\ViewModel\ViewModels\BaseViewModel;
     use LaravelCommode\ViewModel\Interfaces\IRequestBag;
     use Iterator;
 

@@ -6,6 +6,7 @@
     use LaravelCommode\ViewModel\Interfaces\IViewModel;
 
     use Input;
+    use LaravelCommode\ViewModel\RequestBag\RequestBag;
 
     /**
      * Class ViewModelServiceProvider

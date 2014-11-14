@@ -1,4 +1,4 @@
-<?php namespace LaravelCommode\ViewModel;
+<?php namespace LaravelCommode\ViewModel\ViewModels;
 
     use LaravelCommode\ViewModel\Interfaces\IViewModel;
     use Illuminate\Support\Collection;

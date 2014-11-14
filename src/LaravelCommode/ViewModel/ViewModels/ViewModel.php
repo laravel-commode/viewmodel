@@ -1,15 +1,16 @@
-<?php namespace LaravelCommode\ViewModel;
+<?php namespace LaravelCommode\ViewModel\ViewModels;
 
-    use LaravelCommode\ViewModel\BaseViewModel;
+    use LaravelCommode\ViewModel\ViewModels\BaseViewModel;
     use LaravelCommode\ViewModel\Interfaces\IValidatableViewModel;
 
     use Illuminate\Validation\Validator;
+    use LaravelCommode\ViewModel\ViewModels;
 
     /**
      * Class ViewModel
      * @package LaravelCommode\ViewModel
      */
-    abstract class ViewModel extends BaseViewModel implements IValidatableViewModel
+    abstract class ViewModel extends ViewModels\BaseViewModel implements IValidatableViewModel
     {
         protected $_validator = null;
 
