@@ -29,11 +29,11 @@
             $this->package('laravel-commode/viewmodel');
         }
 
-        public function launching() { }
+        protected function launching() { }
 
-        public function registering()
+        protected function registering()
         {
-            $this->app->bind(IRequestBag::class, RequestBag::class);
+            $this->app->singleton(IRequestBag::class, RequestBag::class);
 
             $this->app->resolvingAny(function($resolved, $application = null) {
                 if ($resolved instanceof IFileViewModel) {
