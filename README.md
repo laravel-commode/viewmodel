@@ -38,7 +38,7 @@ service provider in your application config.
 <hr />
 ##<a name="bother">Why should I bother?</a>
 
-I could bet that there many laravel users, that should ask this question:
+I could bet that there many laravel users, that would ask this question:
 
 >"Why should I bother about viewmodel approach, since I have ``Eloquent`` models and ``Input`` facade?".
 
