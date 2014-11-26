@@ -75,6 +75,11 @@
          */
         public function offsetSet($offset, $value)
         {
+            if (is_null($offset))
+            {
+                $offset = count($this->data);
+            }
+
             $this->data[$offset] = $value;
         }
 
@@ -100,7 +105,7 @@
          */
         public function current()
         {
-            return current($this->data);
+            return $this->data[$this->key()];
         }
 
         /**

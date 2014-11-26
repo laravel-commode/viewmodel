@@ -1,5 +1,6 @@
 <?php namespace LaravelCommode\ViewModel\ViewModels;
 
+    use LaravelCommode\ViewModel\Interfaces\IConvertibleViewModel;
     use LaravelCommode\ViewModel\ViewModels\BaseViewModel;
     use LaravelCommode\ViewModel\Interfaces\IValidatableViewModel;
 
@@ -46,6 +47,14 @@
         public function isValid($isNew = true)
         {
             return !$this->extractValidator($isNew)->fails();
+        }
+
+        public function toModel()
+        {
+            $model = $this->getBaseModel($this->toArray());
+            $model->exists = !$this->isCreating();
+
+            return $model;
         }
 
     }

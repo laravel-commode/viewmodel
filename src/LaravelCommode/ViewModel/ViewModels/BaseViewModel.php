@@ -21,14 +21,18 @@
          */
         public function getAttributeList()
         {
-            if (!count($this->attributes))
+            if (count($this->attributes) == 0)
             {
                 $reflection = new ReflectionClass($this);
+
+                // @codeCoverageIgnoreStart
 
                 foreach($reflection->getProperties(ReflectionProperty::IS_PUBLIC) as $property)
                 {
                     $this->attributes[] = $property->name;
                 }
+
+                // @codeCoverageIgnoreEnd
             }
 
             return $this->attributes;
@@ -107,10 +111,7 @@
 
         public function toModel()
         {
-            $model = $this->getBaseModel($this->toArray());
-            $model->exists = !$this->isCreating();
-
-            return $model;
+            return $this->toArray();
         }
 
 
@@ -118,7 +119,7 @@
         {
             if ($state !== IViewModel::StateCreate && $state !== IViewModel::StateUpdate)
             {
-                throw new Exception("Unexpected state\n".print_r($state, 1));
+                throw new Exception("Unexpected state: '{$state}'");
             }
 
             $this->state = $state;

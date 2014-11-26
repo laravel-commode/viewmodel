@@ -4,9 +4,10 @@
     use Illuminate\Support\Contracts\JsonableInterface;
 
     /**
+     * Class IViewModel
+     *
      * ViewModel approach interface.
      *
-     * Class IViewModel
      * @package Application\Utils\ViewModel\Interfaces
      */
     interface IViewModel extends ArrayableInterface, JsonableInterface

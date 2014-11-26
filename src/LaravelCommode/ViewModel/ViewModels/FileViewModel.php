@@ -28,9 +28,10 @@
         {
             foreach($this->getAttributeList() as $key)
             {
-                if (isset($attributes[$key]) && $attributes[$key] instanceof UploadedFile)
-                {
+                if (isset($attributes[$key]) && $attributes[$key] instanceof UploadedFile) {
                     $this->{$key} = $attributes[$key];
+                } else {
+                    $this->{$key} = null;
                 }
             }
 

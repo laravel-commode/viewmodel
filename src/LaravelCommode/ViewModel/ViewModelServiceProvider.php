@@ -21,7 +21,7 @@
          */
         public function provides()
         {
-            return array('commode.viewmodel');
+            return ['commode.viewmodel'];
         }
 
         public function boot()
@@ -33,11 +33,16 @@
 
         protected function registering()
         {
-            $this->app->singleton(IRequestBag::class, RequestBag::class);
+            $this->app->singleton(
+                'LaravelCommode\ViewModel\Interfaces\IRequestBag',
+                'LaravelCommode\ViewModel\RequestBag\RequestBag'
+            );
 
-            $this->app->resolvingAny(function($resolved, $application = null) {
+            $this->app->resolvingAny(function($resolved, $application = null)
+            {
                 if ($resolved instanceof IFileViewModel) {
-                    foreach($resolved->getAttributeList() as $attribute) {
+                    foreach($resolved->getAttributeList() as $attribute)
+                    {
                         $resolved->{$attribute} = Input::file($attribute);
                     }
                 } elseif ($resolved instanceof IRequestBag) {
