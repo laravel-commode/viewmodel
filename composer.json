@@ -13,7 +13,8 @@
         "laravel-commode/common": "dev-master"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {
         "psr-0": {
