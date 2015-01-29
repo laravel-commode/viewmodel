@@ -9,8 +9,25 @@
 
             if ($allowFail)
             {
-                $mock->shouldReceive('fails')->once()->andReturn(false);
+                $mock->shouldReceive('fails')->zeroOrMoreTimes()->andReturn(false);
             }
+
+            return $mock;
+        }
+
+        protected function mockCommodeValidator($allowFail = false, $validator)
+        {
+            $mock = \Mockery::mock('LaravelCommode\ValidationLocator\Validators\Validator');
+
+            if ($allowFail)
+            {
+                $mock->shouldReceive('fails')->zeroOrMoreTimes()->andReturn($allowFail);
+                $mock->shouldReceive('passes')->zeroOrMoreTimes()->andReturn($allowFail);
+                $mock->shouldReceive('getValidator')->once()->andReturn($validator);
+            } else {
+                $mock->shouldReceive('passes')->zeroOrMoreTimes()->andReturn($allowFail);
+            }
+
 
             return $mock;
         }
@@ -32,8 +49,10 @@
 
             $viewModelMock = $mockBuilder->getMockForAbstractClass();
 
+            $validator = $this->mockValidator($allowValidatorFail);
+
             $viewModelMock->expects($this->any())->method('getValidationObject')->will(
-                $this->returnValue($this->mockValidator($allowValidatorFail))
+                $this->returnValue($this->mockCommodeValidator($allowValidatorFail, $validator))
             );
 
             $viewModelMock->expects($this->any())->method('getBaseModel')->will(
@@ -73,11 +92,15 @@
             );
 
             $vmReflection = new \ReflectionClass($viewModel);
-            $refMethod = $vmReflection->getMethod('getValidationObject');
-            $refMethod->setAccessible(true);
+            $getValidationObject = $vmReflection->getMethod('getValidationObject');
+            $getValidationObject->setAccessible(true);
+
+
+            $extractValidator = $vmReflection->getMethod('extractValidator');
+            $extractValidator->setAccessible(true);
 
             $this->assertSame(
-                $viewModel->getValidator(), $refMethod->invokeArgs($viewModel, [])
+                $extractValidator->invokeArgs($viewModel, []), $getValidationObject->invokeArgs($viewModel, [])
             );
 
             $this->assertTrue($viewModel->isValid());

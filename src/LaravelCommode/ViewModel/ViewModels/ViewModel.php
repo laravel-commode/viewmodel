@@ -13,6 +13,9 @@
      */
     abstract class ViewModel extends ViewModels\BaseViewModel implements IValidatableViewModel
     {
+        /**
+         * @var \LaravelCommode\ValidationLocator\Validators\Validator|null
+         */
         protected $_validator = null;
 
         /**
@@ -24,7 +27,7 @@
         /**
          * @param array $data
          * @param bool $isNew
-         * @return Validator
+         * @return \LaravelCommode\ValidationLocator\Validators\Validator
          */
         abstract protected function getValidationObject($data = [], $isNew = true);
 
@@ -41,12 +44,12 @@
 
         public function getValidator()
         {
-            return $this->extractValidator();
+            return $this->extractValidator()->getValidator();
         }
 
         public function isValid($isNew = true)
         {
-            return !$this->extractValidator($isNew)->fails();
+            return $this->extractValidator($isNew)->passes();
         }
 
         public function toModel()
