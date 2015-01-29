@@ -6,9 +6,9 @@ php:
   - 5.6
   - hhvm
 
-  addons:
-    code_climate:
-      repo_token: b0ffd1278ed2f392508c0c49c755ab2b84c975151008c7fda17f72d7fb34e49e
+addons:
+  code_climate:
+    repo_token: b0ffd1278ed2f392508c0c49c755ab2b84c975151008c7fda17f72d7fb34e49e
 
 before_script:
   - composer self-update
