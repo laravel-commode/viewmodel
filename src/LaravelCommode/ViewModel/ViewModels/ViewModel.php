@@ -31,8 +31,13 @@
          */
         abstract protected function getValidationObject($data = [], $isNew = true);
 
-
-        protected function extractValidator($isNew = true)
+        /**
+         * Returns LaravelCommode validator instance
+         *
+         * @param bool $isNew
+         * @return \LaravelCommode\ValidationLocator\Validators\Validator|null
+         */
+        public function extractValidator($isNew = true)
         {
             if (is_null($this->_validator))
             {
@@ -42,6 +47,10 @@
             return $this->_validator;
         }
 
+        /**
+         * Returns Laravel's native validator
+         * @return Validator|null
+         */
         public function getValidator()
         {
             return $this->extractValidator()->getValidator();
