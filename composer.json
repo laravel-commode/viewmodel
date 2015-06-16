@@ -1,6 +1,6 @@
 {
     "name": "laravel-commode/viewmodel",
-    "description": "ViewModel approach for laravel 4.(=>1)",
+    "description": "ViewModel approach for laravel 5.(=>1)",
     "authors": [
         {
             "name": "Volynov Andrey",
@@ -9,14 +9,14 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*",
-        "laravel-commode/common": "dev-master",
+        "php": ">=5.5.0",
+        "illuminate/support": "5.1.*",
+        "illuminate/http": "5.1.*",
+        "laravel-commode/silent-service": "dev-master",
         "laravel-commode/validation-locator": "dev-master"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master",
-        "codeclimate/php-test-reporter": "dev-master"
+
     },
     "autoload": {
         "psr-0": {

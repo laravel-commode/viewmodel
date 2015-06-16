@@ -1,25 +1,25 @@
-<?php namespace LaravelCommode\ViewModel\Interfaces;
+<?php
 
-    use LaravelCommode\ViewModel\Interfaces\IViewModel;
-    use Symfony\Component\HttpFoundation\File\UploadedFile;
+namespace LaravelCommode\ViewModel\Interfaces;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * ViewModel approach for files.
+ */
+interface IFileViewModel extends IViewModel
+{
+    /**
+     * Method is supposed to save file and return
+     * bool value if operation failed of
+     * @param $path
+     * @param null $name
+     * @return mixed
+     */
+    public function save($path, $name = null);
 
     /**
-     * ViewModel approach for files.
-     *
+     * @return UploadedFile
      */
-    interface IFileViewModel extends IViewModel
-    {
-        /**
-         * Method is supposed to save file and return
-         * bool value if operation failed of
-         * @param $path
-         * @param null $name
-         * @return mixed
-         */
-        public function save($path, $name = null);
-
-        /**
-         * @return UploadedFile
-         */
-        public function getFile();
-    }
+    public function getFile();
+}

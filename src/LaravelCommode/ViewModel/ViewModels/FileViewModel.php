@@ -1,40 +1,37 @@
-<?php namespace LaravelCommode\ViewModel\ViewModels;
+<?php
 
-    use LaravelCommode\ViewModel\ViewModels\ViewModel;
-    use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
-    use LaravelCommode\ViewModel\Interfaces\IViewModel;
+namespace LaravelCommode\ViewModel\ViewModels;
 
-    use Exception,
-        ReflectionClass,
-        ReflectionProperty;
+use LaravelCommode\ViewModel\ViewModels\ViewModel;
+use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
+use LaravelCommode\ViewModel\Interfaces\IViewModel;
 
-    use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Exception,
+    ReflectionClass,
+    ReflectionProperty;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * Class ViewModel
+ * @package LaravelCommode\ViewModel
+ */
+abstract class FileViewModel extends ViewModel implements IFileViewModel
+{
     /**
-     * Class ViewModel
-     * @package LaravelCommode\ViewModel
+     * @param array $attributes
+     * @return \LaravelCommode\ViewModel\Interfaces\IViewModel
      */
-    abstract class FileViewModel extends ViewModel implements IFileViewModel
+    public function fill(array $attributes = [])
     {
-        protected $attributes = array();
-        protected $state = IViewModel::StateCreate;
-        protected $_validator = null;
+        foreach ($this->getAttributeList() as $key) {
+            $this->{$key} = null;
 
-        /**
-         * @param array $attributes
-         * @return \LaravelCommode\ViewModel\Interfaces\IViewModel
-         */
-        public function fill($attributes = array())
-        {
-            foreach($this->getAttributeList() as $key)
-            {
-                if (isset($attributes[$key]) && $attributes[$key] instanceof UploadedFile) {
-                    $this->{$key} = $attributes[$key];
-                } else {
-                    $this->{$key} = null;
-                }
+            if (array_key_exists($key, $attributes) && $attributes[$key] instanceof UploadedFile) {
+                $this->{$key} = $attributes[$key];
             }
-
-            return $this;
         }
+
+        return $this;
     }
+}

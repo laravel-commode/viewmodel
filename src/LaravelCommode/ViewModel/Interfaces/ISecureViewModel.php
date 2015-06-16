@@ -1,5 +1,5 @@
-<?php namespace LaravelCommode\ViewModel\Interfaces;
+<?php
 
-    use LaravelCommode\ViewModel\Interfaces\IViewModel;
+namespace LaravelCommode\ViewModel\Interfaces;
 
-    interface ISecureViewModel extends IViewModel { }
+interface ISecureViewModel extends IViewModel { }

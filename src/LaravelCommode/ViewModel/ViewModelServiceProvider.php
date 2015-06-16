@@ -1,55 +1,41 @@
-<?php namespace LaravelCommode\ViewModel;
+<?php
 
-    use LaravelCommode\Common\GhostService\GhostService;
-    use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
-    use LaravelCommode\ViewModel\Interfaces\IRequestBag;
-    use LaravelCommode\ViewModel\Interfaces\IViewModel;
+namespace LaravelCommode\ViewModel;
 
-    use Input;
-    use LaravelCommode\ViewModel\RequestBag\RequestBag;
+use Illuminate\Http\Request;
+use LaravelCommode\SilentService\SilentService;
+use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
+use LaravelCommode\ViewModel\Interfaces\IRequestBag;
+use LaravelCommode\ViewModel\Interfaces\IViewModel;
+use LaravelCommode\ViewModel\RequestBag\RequestBag;
 
-    /**
-     * Class ViewModelServiceProvider
-     * @package LaravelCommode\ViewModel
-     */
-    class ViewModelServiceProvider extends GhostService
+class ViewModelServiceProvider extends SilentService
+{
+    public function launching()
     {
-        /**
-         * Get the services provided by the provider.
-         *
-         * @return array
-         */
-        public function provides()
-        {
-            return ['commode.viewmodel'];
-        }
-
-        public function boot()
-        {
-            $this->package('laravel-commode/viewmodel');
-        }
-
-        protected function launching() { }
-
-        protected function registering()
-        {
-            $this->app->singleton(
-                'LaravelCommode\ViewModel\Interfaces\IRequestBag',
-                'LaravelCommode\ViewModel\RequestBag\RequestBag'
-            );
-
-            $this->app->resolvingAny(function($resolved, $application = null)
-            {
-                if ($resolved instanceof IFileViewModel) {
-                    foreach($resolved->getAttributeList() as $attribute)
-                    {
-                        $resolved->{$attribute} = Input::file($attribute);
-                    }
-                } elseif ($resolved instanceof IRequestBag) {
-                    $resolved->fill(Input::all());
-                } elseif ($resolved instanceof IViewModel) {
-                    $resolved->fill(Input::only($resolved->getAttributeList()));
-                }
-            });
-        }
     }
+
+    private function onResolving(Request $request)
+    {
+        return function ($resolved) use ($request) {
+            if ($resolved instanceof IFileViewModel) {
+                foreach ($resolved->getAttributeList() as $attribute) {
+                    $resolved->{$attribute} = $request->file($attribute);
+                }
+            } elseif ($resolved instanceof IRequestBag) {
+                $resolved->fill($request->all());
+            } elseif ($resolved instanceof IViewModel) {
+                $resolved->fill($request->only($resolved->getAttributeList()));
+            }
+        };
+    }
+
+    public function registering()
+    {
+        $this->app->singleton(IRequestBag::class, RequestBag::class);
+
+        $this->with(['request'], function (Request $request) {
+            $this->app->resolving($this->onResolving($request));
+        });
+    }
+}
