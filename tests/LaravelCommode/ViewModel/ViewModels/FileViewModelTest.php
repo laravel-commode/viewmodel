@@ -22,7 +22,7 @@ class FileViewModelTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->testInstance = $this->getMockForAbstractClass(FileViewModel::class);
-        $this->fileMock = $this->getMockForAbstractClass(UploadedFile::class, [], '', false);
+        $this->fileMock = $this->getMockForAbstractClass(UploadedFile::class, [__FILE__, basename(__FILE__)], '', true);
         parent::setUp();
     }
 
