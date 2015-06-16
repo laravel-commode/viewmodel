@@ -4,6 +4,7 @@ namespace LaravelCommode\ViewModel;
 
 use Illuminate\Http\Request;
 use LaravelCommode\SilentService\SilentService;
+use LaravelCommode\ValidationLocator\ValidationLocatorServiceProvider;
 use LaravelCommode\ViewModel\Interfaces\IFileViewModel;
 use LaravelCommode\ViewModel\Interfaces\IRequestBag;
 use LaravelCommode\ViewModel\Interfaces\IViewModel;
@@ -11,6 +12,11 @@ use LaravelCommode\ViewModel\RequestBag\RequestBag;
 
 class ViewModelServiceProvider extends SilentService
 {
+    protected function uses()
+    {
+        return [ValidationLocatorServiceProvider::class];
+    }
+
     public function launching()
     {
     }

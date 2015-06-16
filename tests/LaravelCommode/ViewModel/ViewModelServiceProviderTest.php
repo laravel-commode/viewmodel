@@ -3,6 +3,7 @@
 namespace LaravelCommode\ViewModel;
 
 use Illuminate\Http\Request;
+use LaravelCommode\ValidationLocator\ValidationLocatorServiceProvider;
 use LaravelCommode\ViewModel\RequestBag\RequestBag;
 use LaravelCommode\ViewModel\TestSubjects\FileViewModel;
 use LaravelCommode\ViewModel\TestSubjects\ViewModel;
@@ -43,6 +44,19 @@ class ViewModelServiceProviderTest extends PHPUnit_Framework_TestCase
     public function testLaunching()
     {
         $this->testInstance->launching();
+    }
+
+    public function testUses()
+    {
+        $reflectionMethod = new \ReflectionMethod($this->testInstance, 'uses');
+        $reflectionMethod->setAccessible(true);
+
+        $this->assertSame(
+            [ValidationLocatorServiceProvider::class],
+            $reflectionMethod->invoke($this->testInstance)
+        );
+
+        $reflectionMethod->setAccessible(false);
     }
 
     public function testRegister()
